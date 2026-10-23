@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE // DÖNER — Spit · Sliced · Stacked</title>
+<meta name="description" content="Slow-roasted on the vertical spit. Veal and lamb, seven spices, 220 degrees.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2306080b'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='%23d9a441' font-family='Arial Black'%3ED%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Anton';src:url('fonts/Anton-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Archivo';src:url('fonts/Archivo-400.woff2') format('woff2');font-weight:400 900;font-display:swap}
+:root{
+  --bg:#06080b; --panel:#0b0e13; --panel2:#0e1219; --line:#1e2531; --gold:#d9a441; --amber:#ff7a1a;
+  --txt:#e9e7de; --dim:#8b93a1; --anton:'Anton',Impact,sans-serif; --arch:'Archivo',Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:clip;background:var(--bg)}
+body{font-family:var(--arch);color:var(--txt);-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+::selection{background:var(--gold);color:#000}
+.mono{font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--dim)}
+.gold{color:var(--gold)}
+
+/* ---------- FIXED CHROME ---------- */
+header{position:fixed;inset:0 0 auto 0;z-index:70;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;background:linear-gradient(180deg,rgba(6,8,11,.92),rgba(6,8,11,0))}
+.logo{font-family:var(--anton);font-size:20px;color:#fff;text-decoration:none;letter-spacing:.04em}
+.logo i{font-style:normal;color:var(--gold)}
+header nav{display:flex;gap:24px}
+header nav a{color:var(--dim);text-decoration:none;font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase}
+header nav a:hover{color:var(--gold)}
+.order-top{font-family:var(--anton);background:var(--gold);color:#000;padding:8px 16px;font-size:13px;letter-spacing:.06em;text-decoration:none;border-radius:2px}
+@media(max-width:760px){header nav{display:none}}
+.rail{position:fixed;left:0;top:0;bottom:0;width:34px;z-index:60;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center;gap:34px;align-items:center;background:rgba(6,8,11,.6)}
+.rail span{writing-mode:vertical-rl;font-size:9px;font-weight:700;letter-spacing:.3em;color:#4c5566;text-transform:uppercase;white-space:nowrap}
+.rail span b{color:var(--gold);font-weight:700}
+.ruler{position:fixed;right:0;top:0;bottom:0;width:26px;z-index:60;border-left:1px solid var(--line);
+  background:repeating-linear-gradient(180deg,transparent 0 11px,rgba(217,164,65,.35) 11px 12px)}
+.ruler::after{content:"";position:absolute;left:0;top:38%;width:100%;height:1px;background:var(--gold)}
+@media(max-width:900px){.rail,.ruler{display:none}}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+@media(min-width:901px){.wrap{padding:0 58px}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;height:100svh;min-height:620px;overflow:clip}
+.hero-film{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-56%);height:100%;aspect-ratio:9/16;z-index:0}
+.hero-film video{width:100%;height:100%;object-fit:cover}
+.hero-film::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,11,.55),transparent 30%,transparent 78%,rgba(6,8,11,.65));box-shadow:inset 0 -120px 90px -40px var(--bg)}
+.hero-side{position:absolute;z-index:2;font-size:10px;font-weight:700;letter-spacing:.34em;color:var(--dim);text-transform:uppercase;writing-mode:vertical-rl}
+.hero-side.l{left:calc(50% - 348px);top:50%;transform:translateY(-50%) rotate(180deg)}
+.hero-side.r{right:calc(50% - 348px);top:50%;transform:translateY(-50%)}
+@media(max-width:900px){.hero-side{display:none}.hero-film{transform:translateX(-50%)}}
+.hero-title{position:absolute;z-index:3;left:0;bottom:110px}
+.hero-title .mono{color:var(--gold);margin-bottom:12px}
+.hero-title h1{font-family:var(--anton);font-size:clamp(64px,10.5vw,148px);line-height:.9;text-transform:uppercase;color:#fff}
+.hero-title h1 i{font-style:normal;color:var(--gold)}
+.hero-foot{position:absolute;z-index:3;left:0;right:0;bottom:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hero-foot .mono{color:#5d6675}
+
+/* ---------- SECTION SCAFFOLD ---------- */
+.sec{padding:110px 0 90px;border-top:1px solid var(--line);position:relative}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:44px;flex-wrap:wrap}
+.sec-head .no{font-family:var(--anton);color:var(--gold);font-size:20px}
+.sec-head h2{font-family:var(--anton);font-size:clamp(36px,5.4vw,68px);text-transform:uppercase;line-height:.95;color:#fff}
+.sec-head .mono{margin-left:auto}
+
+/* ---------- SPECS ---------- */
+.specs-grid{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:44px;align-items:start}
+.specs-grid h3{font-family:var(--anton);font-size:clamp(28px,3.4vw,44px);text-transform:uppercase;line-height:1;color:#fff}
+.specs-grid h3 i{font-style:normal;color:var(--gold)}
+.specs-grid p{font-size:14.5px;line-height:1.65;color:#b9bec9}
+.temp{font-family:var(--anton);font-size:clamp(58px,7vw,96px);color:var(--gold);line-height:1}
+.temp small{display:block;font-family:var(--arch);font-size:10px;font-weight:700;letter-spacing:.3em;color:var(--dim);margin-bottom:8px;text-transform:uppercase}
+.spec-table{margin-top:26px;border-top:1px solid var(--line)}
+.spec-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.spec-row span{color:var(--dim);font-weight:700}
+.spec-row b{color:var(--txt);font-weight:900}
+.temp-line{height:2px;background:var(--line);margin-top:22px;position:relative}
+.temp-line i{position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+@media(max-width:900px){.specs-grid{grid-template-columns:1fr}}
+
+/* ---------- FILM SCENES ---------- */
+.film-scene{position:relative;height:92svh;overflow:clip;border-top:1px solid var(--line)}
+.film-scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film-scene .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,11,.45),transparent 30%,transparent 60%,rgba(6,8,11,.8))}
+.film-cap{position:absolute;left:22px;bottom:26px;z-index:2}
+@media(min-width:901px){.film-cap{left:58px}}
+.film-cap .no{font-family:var(--anton);color:var(--gold);font-size:17px}
+.film-cap h2{font-family:var(--anton);font-size:clamp(38px,5.6vw,74px);color:#fff;text-transform:uppercase;line-height:.95}
+.film-cap p{margin-top:8px;font-size:13px;color:#c6cad2;max-width:340px;line-height:1.55}
+
+/* ---------- TWO WORLDS ---------- */
+.worlds{position:relative;padding:130px 0 110px;border-top:1px solid var(--line);overflow:clip;text-align:center}
+.worlds h2{font-family:var(--anton);font-size:clamp(42px,7vw,100px);text-transform:uppercase;line-height:.94;color:#fff;position:relative;z-index:3}
+.worlds h2 i{font-style:normal;color:var(--gold)}
+.worlds-stage{position:relative;height:min(560px,80vw);margin-top:10px}
+.worlds-stage .sandwich{position:absolute;left:50%;top:50%;width:min(520px,74vw);transform:translate(-50%,-50%);z-index:2;filter:drop-shadow(0 34px 44px rgba(0,0,0,.7))}
+.worlds-stage .scatter{position:absolute;left:50%;top:50%;width:min(860px,120vw);transform:translate(-50%,-50%);z-index:1;opacity:.95}
+.flags{display:flex;gap:10px;justify-content:center;margin-top:6px;position:relative;z-index:3}
+.flag{font-size:10.5px;font-weight:900;letter-spacing:.22em;padding:7px 14px;border-radius:2px;text-transform:uppercase}
+.flag.tr{background:#e30a17;color:#fff}
+.flag.de{background:linear-gradient(180deg,#151515 33%,#dd0000 33% 66%,#ffcc00 66%);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+
+/* ---------- LINE-UP ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:clip}
+.card .ph{aspect-ratio:4/3;overflow:clip}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:20px}
+.card .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card h3{font-family:var(--anton);font-size:24px;text-transform:uppercase;color:#fff}
+.card .price{font-family:var(--anton);font-size:24px;color:var(--gold)}
+.card p{margin-top:9px;font-size:13px;line-height:1.55;color:var(--dim)}
+.card .tag{display:inline-block;margin-top:14px;font-size:9.5px;font-weight:900;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--line);color:#c6cad2;padding:5px 10px;border-radius:2px}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+
+/* ---------- BUILDER ---------- */
+.build-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:start}
+.build-photo{position:relative;border:1px solid var(--line);border-radius:6px;overflow:clip;aspect-ratio:4/3.4;background:var(--panel)}
+.build-photo img{width:100%;height:100%;object-fit:cover}
+.build-photo .bp-price{position:absolute;top:16px;right:16px;font-family:var(--anton);font-size:34px;color:#fff;background:rgba(6,8,11,.72);padding:6px 14px;border-radius:3px}
+.build-photo .bp-price i{font-style:normal;color:var(--gold)}
+.step-label{font-size:10.5px;font-weight:900;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.size-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.size-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:clip;cursor:pointer;text-align:left;padding:0;color:var(--txt)}
+.size-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.size-card .sc-body{padding:10px 12px;display:flex;justify-content:space-between;align-items:baseline}
+.size-card .sc-body b{font-family:var(--anton);font-weight:400;font-size:15px;text-transform:uppercase}
+.size-card .sc-body span{color:var(--gold);font-weight:900;font-size:13px}
+.size-card.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.extras-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.extra{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:clip;cursor:pointer;text-align:left;padding:0;color:var(--txt);position:relative}
+.extra img{width:100%;aspect-ratio:1.35;object-fit:cover}
+.extra .ex-body{padding:9px 11px}
+.extra .ex-body b{display:block;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.extra .ex-body span{font-size:11px;color:var(--gold);font-weight:900}
+.extra .tick{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#000;font-size:13px;font-weight:900;display:none;align-items:center;justify-content:center}
+.extra.on{border-color:var(--gold)}
+.extra.on .tick{display:flex}
+.total-bar{margin-top:22px;background:var(--gold);color:#000;border-radius:4px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;gap:14px;flex-wrap:wrap}
+.total-bar .t-lab{font-size:10.5px;font-weight:900;letter-spacing:.26em;text-transform:uppercase}
+.total-bar .t-val{font-family:var(--anton);font-size:34px}
+.total-bar button{font-family:var(--anton);background:#000;color:#fff;border:none;padding:13px 24px;font-size:15px;letter-spacing:.06em;border-radius:3px;cursor:pointer}
+@media(max-width:900px){.build-grid{grid-template-columns:1fr}}
+
+/* ---------- ROAST STATS ---------- */
+.roast{position:relative;border-top:1px solid var(--line);overflow:clip}
+.roast video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.roast .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,11,.88) 30%,rgba(6,8,11,.35))}
+.roast-in{position:relative;z-index:2;padding:110px 0 100px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:54px}
+.stat .num{font-family:var(--anton);font-size:clamp(44px,6vw,84px);color:#fff;line-height:1}
+.stat .num i{font-style:normal;color:var(--gold)}
+.stat .lab{margin-top:9px;font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#c6cad2}
+.stat .bar{height:2px;background:rgba(255,255,255,.18);margin-top:14px}
+.stat .bar i{display:block;height:100%;background:var(--gold);width:0}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+
+/* ---------- LAYERS ---------- */
+.layers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.layer-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:clip;position:relative}
+.layer-card img{width:100%;aspect-ratio:4/2.9;object-fit:cover}
+.layer-card .lc-body{padding:18px 20px 20px}
+.layer-card .idx{font-family:var(--anton);font-size:15px;color:var(--gold)}
+.layer-card h3{font-family:var(--anton);font-size:21px;text-transform:uppercase;color:#fff;margin:5px 0 7px}
+.layer-card p{font-size:12.5px;line-height:1.55;color:var(--dim)}
+@media(max-width:900px){.layers-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.layers-grid{grid-template-columns:1fr}}
+
+/* ---------- CRAFT ---------- */
+.craft-big{font-family:var(--anton);font-size:clamp(56px,11vw,150px);line-height:.92;text-transform:uppercase;color:transparent;-webkit-text-stroke:2px #39424f;white-space:nowrap}
+.craft-cols{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:52px}
+.craft-cols h3{font-family:var(--anton);font-size:22px;text-transform:uppercase;color:#fff;margin-bottom:12px}
+.craft-cols h3 i{font-style:normal;color:var(--gold)}
+.craft-cols p{font-size:14px;line-height:1.7;color:#b9bec9}
+@media(max-width:900px){.craft-cols{grid-template-columns:1fr}}
+
+/* ---------- ORDER / FOOTER ---------- */
+.order-strip{border-top:1px solid var(--line);padding:70px 0;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.order-strip h2{font-family:var(--anton);font-size:clamp(32px,4.6vw,56px);text-transform:uppercase;color:#fff}
+.order-strip h2 i{font-style:normal;color:var(--gold)}
+.guests{display:flex;align-items:center;gap:14px}
+.guests button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:#fff;font-size:18px;cursor:pointer}
+.guests b{font-family:var(--anton);font-size:24px;min-width:30px;text-align:center}
+.place-btn{font-family:var(--anton);background:var(--gold);color:#000;border:none;padding:15px 30px;font-size:16px;letter-spacing:.05em;border-radius:3px;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:24px 0 30px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">THE <i>//</i> DÖNER</a>
+  <nav>
+    <a href="#specs">Specs</a><a href="#lineup">Line-Up</a><a href="#build">Build</a><a href="#roast">Roast</a><a href="#layers">Layers</a>
+  </nav>
+  <a class="order-top" href="#build">ORDER</a>
+</header>
+
+<div class="rail" aria-hidden="true">
+  <span><b>01</b> · THE SPIT</span><span><b>02</b> · THE DIVE</span><span><b>03</b> · THE BURST</span><span><b>04</b> · THE ROAST</span><span><b>06</b> · THE LAYERS</span>
+</div>
+<div class="ruler" aria-hidden="true"></div>
+
+<!-- 01 · THE SPIT -->
+<section class="hero">
+  <div class="hero-film">
+    <video autoplay muted loop playsinline preload="metadata" poster="img/spit.webp"><source src="films/spit-film-p.mp4" type="video/mp4"></video>
+  </div>
+  <div class="hero-side l">Slow-roasted // No.01</div>
+  <div class="hero-side r">Spit · Sliced · Stacked</div>
+  <div class="wrap" style="position:relative;height:100%">
+    <div class="hero-title">
+      <div class="mono">Est. Berlin — The original stack</div>
+      <h1>The<br><i>//</i> Döner</h1>
+    </div>
+    <div class="hero-foot">
+      <span class="mono">200–220°C · Radiant heat</span>
+      <span class="mono">Scroll to descend ↓</span>
+      <span class="mono">60 cm · Seven spices</span>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · THE DIVE / SPECIFICATIONS -->
+<section class="sec" id="specs">
+  <div class="wrap">
+    <div class="specs-grid">
+      <div>
+        <h3>Specifications<br><i>//</i> 02. The Dive</h3>
+      </div>
+      <div>
+        <p>Veal and lamb, marinated 24 hours in seven spices, stacked 60 cm high on a vertical spit rotating at 4–6 RPM in radiant heat. Nothing is rushed: the stack rests, roasts, and is sliced to order — millimetre by millimetre.</p>
+        <div class="spec-table">
+          <div class="spec-row"><span>Roast temp</span><b>200–220°C</b></div>
+          <div class="spec-row"><span>Rotation</span><b>4–6 RPM</b></div>
+          <div class="spec-row"><span>Meat</span><b>Veal + Lamb</b></div>
+          <div class="spec-row"><span>Sauce</span><b>Garlic yogurt</b></div>
+          <div class="spec-row"><span>Bread</span><b>Durum wheat</b></div>
+          <div class="spec-row"><span>Stack ht.</span><b>60–90 cm</b></div>
+          <div class="spec-row"><span>Spit time</span><b>4–6 hours</b></div>
+        </div>
+      </div>
+      <div>
+        <div class="temp"><small>Roast temp · live</small><span id="tempNum">220°C</span></div>
+        <div class="temp-line"><i id="tempLine"></i></div>
+        <p style="margin-top:18px;font-size:12.5px;color:var(--dim);line-height:1.6">Scroll — the deeper you go, the hotter it gets. The crust forms at 180°C; we slice at 220°C.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · THE BURST -->
+<section class="film-scene">
+  <video autoplay muted loop playsinline preload="metadata" poster="img/burst-macro.webp"><source src="films/burst-film.mp4" type="video/mp4"></video>
+  <div class="shade"></div>
+  <div class="film-cap">
+    <div class="no">03. The Burst</div>
+    <h2>Maillard</h2>
+    <p>Cellular chaos, caramelised. The crust crackles so the inside stays silk.</p>
+  </div>
+</section>
+
+<!-- BORN FROM TWO WORLDS -->
+<section class="worlds">
+  <div class="wrap">
+    <h2>Born from<br><i>two</i> worlds</h2>
+    <div class="flags"><span class="flag tr">Türkiye</span><span class="flag de">Deutschland</span></div>
+    <div class="worlds-stage">
+      <img class="scatter" id="scatterImg" src="img/scatter-a.webp" alt="">
+      <img class="sandwich" id="sandwichImg" src="img/sandwich-a.webp" alt="The Döner sandwich">
+    </div>
+  </div>
+</section>
+
+<!-- // 01 · THE LINE-UP -->
+<section class="sec" id="lineup">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">// 01.</span><h2>The Line-Up</h2><span class="mono">Three stacks · No shortcuts</span></div>
+    <div class="cards">
+      <article class="card">
+        <div class="ph"><img src="img/wrap-classic.webp" alt="The Classic"></div>
+        <div class="body">
+          <div class="row"><h3>The Classic</h3><span class="price">€11</span></div>
+          <p>Slow-roasted veal on durum flatbread. Garlic yogurt, sumac onions, fresh herbs.</p>
+          <span class="tag">The original</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/wrap-spicy.webp" alt="The Spicy"></div>
+        <div class="body">
+          <div class="row"><h3>The Spicy</h3><span class="price">€12</span></div>
+          <p>Chili heat layered under the crust. Jalapeños, red sauce, cooling yogurt.</p>
+          <span class="tag">Heat</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/wrap-gold.webp" alt="The Gold"></div>
+        <div class="body">
+          <div class="row"><h3>The Gold</h3><span class="price">€14</span></div>
+          <p>Our icon. Double meat, double crust, truffle-kissed sauce. The one they photograph.</p>
+          <span class="tag">Signature</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- // 02 · BUILD YOUR DÖNER -->
+<section class="sec" id="build">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">// 02.</span><h2>Build your Döner</h2><span class="mono">Your stack · Your spec</span></div>
+    <div class="build-grid">
+      <div class="build-photo">
+        <img id="buildPhoto" src="img/wrap-classic.webp" alt="Your döner">
+        <div class="bp-price"><i>€</i><span id="bpPrice">11</span></div>
+      </div>
+      <div>
+        <p class="step-label">Step 1 — Choose size</p>
+        <div class="size-row">
+          <button class="size-card" data-size="S" data-price="9" data-img="img/wrap-spicy.webp">
+            <img src="img/wrap-spicy.webp" alt="Small"><div class="sc-body"><b>S</b><span>€9</span></div>
+          </button>
+          <button class="size-card on" data-size="Classic" data-price="11" data-img="img/wrap-classic.webp">
+            <img src="img/wrap-classic.webp" alt="Classic"><div class="sc-body"><b>Classic</b><span>€11</span></div>
+          </button>
+          <button class="size-card" data-size="XL" data-price="13" data-img="img/wrap-gold.webp">
+            <img src="img/wrap-gold.webp" alt="XL"><div class="sc-body"><b>XL</b><span>€13</span></div>
+          </button>
+        </div>
+        <p class="step-label">Step 2 — Add extras</p>
+        <div class="extras-grid" id="extrasGrid">
+          <button class="extra" data-name="Extra meat" data-price="3"><img src="img/layer-veal.webp" alt=""><span class="tick">✓</span><div class="ex-body"><b>Extra meat</b><span>+€3</span></div></button>
+          <button class="extra" data-name="Garlic yogurt" data-price="2"><img src="img/layer-yogurt.webp" alt=""><span class="tick">✓</span><div class="ex-body"><b>Garlic yogurt</b><span>+€2</span></div></button>
+          <button class="extra" data-name="Sumac onions" data-price="2"><img src="img/layer-onions.webp" alt=""><span class="tick">✓</span><div class="ex-body"><b>Sumac onions</b><span>+€2</span></div></button>
+          <button class="extra" data-name="Fresh herbs" data-price="2"><img src="img/layer-herbs.webp" alt=""><span class="tick">✓</span><div class="ex-body"><b>Fresh herbs</b><span>+€2</span></div></button>
+          <button class="extra" data-name="Heirloom tomato" data-price="2"><img src="img/layer-tomato.webp" alt=""><span class="tick">✓</span><div class="ex-body"><b>Heirloom tomato</b><span>+€2</span></div></button>
+          <button class="extra" data-name="Extra flatbread" data-price="2"><img src="img/layer-bread.webp" alt=""><span class="tick">✓</span><div class="ex-body"><b>Extra flatbread</b><span>+€2</span></div></button>
+        </div>
+        <div class="total-bar">
+          <div><div class="t-lab">Total · <span id="tDesc">Classic</span></div><div class="t-val">€<span id="tVal">11</span></div></div>
+          <button id="orderBtn">Order your Döner</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- // 04 · THE ROAST -->
+<section class="roast" id="roast">
+  <video autoplay muted loop playsinline preload="metadata" poster="img/kitchen.webp"><source src="films/kitchen-film.mp4" type="video/mp4"></video>
+  <div class="shade"></div>
+  <div class="wrap roast-in">
+    <div class="sec-head" style="border:none;margin-bottom:0"><span class="no">// 04.</span><h2>The Roast</h2></div>
+    <div class="stats">
+      <div class="stat"><div class="num"><span data-count="24">24</span><i>H</i></div><div class="lab">Marinade</div><div class="bar"><i data-bar="80"></i></div></div>
+      <div class="stat"><div class="num"><span data-count="7">7</span></div><div class="lab">Spices</div><div class="bar"><i data-bar="46"></i></div></div>
+      <div class="stat"><div class="num"><span data-count="220">220</span><i>°C</i></div><div class="lab">Roast temp</div><div class="bar"><i data-bar="100"></i></div></div>
+      <div class="stat"><div class="num"><span data-count="6">6</span><i>H</i></div><div class="lab">On the spit</div><div class="bar"><i data-bar="60"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- // 06 · THE LAYERS -->
+<section class="sec" id="layers">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">// 06.</span><h2>The Layers</h2><span class="mono">Every layer · Hand-selected</span></div>
+    <div class="layers-grid">
+      <article class="layer-card"><img src="img/layer-bread.webp" alt=""><div class="lc-body"><div class="idx">01</div><h3>Durum Flatbread</h3><p>Stone-baked daily. The vessel, never the filler.</p></div></article>
+      <article class="layer-card"><img src="img/layer-veal.webp" alt=""><div class="lc-body"><div class="idx">02</div><h3>Slow-Roasted Veal</h3><p>Stacked with lamb, sliced at 220°C, thin as paper.</p></div></article>
+      <article class="layer-card"><img src="img/layer-yogurt.webp" alt=""><div class="lc-body"><div class="idx">03</div><h3>Garlic Yogurt</h3><p>Whipped every morning. The cool counterpoint.</p></div></article>
+      <article class="layer-card"><img src="img/layer-onions.webp" alt=""><div class="lc-body"><div class="idx">04</div><h3>Sumac Onions</h3><p>Hand-sliced, sumac-cured. Acid, crunch, colour.</p></div></article>
+      <article class="layer-card"><img src="img/layer-herbs.webp" alt=""><div class="lc-body"><div class="idx">05</div><h3>Fresh Herbs</h3><p>Parsley cut to order. Never yesterday's.</p></div></article>
+      <article class="layer-card"><img src="img/layer-tomato.webp" alt=""><div class="lc-body"><div class="idx">06</div><h3>Heirloom Tomato</h3><p>Ripe, dense, sliced thick. The freshness layer.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- // 07 · THE CRAFT -->
+<section class="sec">
+  <div class="wrap">
+    <div class="craft-big">The Craft</div>
+    <div class="craft-cols">
+      <div>
+        <h3>Why we roast <i>for 6 hours</i></h3>
+        <p>Because the crust is not a coating — it is a structure. Fat renders, edges caramelise, and the stack tightens layer by layer until the knife meets resistance, then silk. Two to three hours gets you cooked meat. Six gets you döner.</p>
+      </div>
+      <div>
+        <h3>Sourcing our veal — <i>Anatolia to Berlin</i></h3>
+        <p>After testing suppliers across Türkiye, Austria and Bavaria, one came out ahead on every measure: consistent marbling, clean fat, honest weights. Every stack is built by hand, every morning, in this kitchen.</p>
+      </div>
+    </div>
+    <div class="order-strip">
+      <h2>Place <i>your</i> order</h2>
+      <div class="guests">
+        <span class="mono">Guests</span>
+        <button id="gMinus" aria-label="Fewer guests">−</button>
+        <b id="gVal">2</b>
+        <button id="gPlus" aria-label="More guests">+</button>
+      </div>
+      <button class="place-btn" id="placeBtn">Reserve the spit</button>
+    </div>
+    <footer>
+      <p>THE // DÖNER — a scroll-experience concept demo. Food photography is AI-generated for this demo. Built by VERTEX WEB.</p>
+      <p>SPIT · SLICED · STACKED</p>
+    </footer>
+  </div>
+</section>
+
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script>
+/* ---------- BUILDER (vanilla, works without GSAP) ---------- */
+(function(){
+  var base = 11, sizeName = 'Classic', extras = {};
+  var photo = document.getElementById('buildPhoto'),
+      bpPrice = document.getElementById('bpPrice'),
+      tVal = document.getElementById('tVal'),
+      tDesc = document.getElementById('tDesc');
+  function total(){
+    var t = base;
+    Object.keys(extras).forEach(function(k){ t += extras[k]; });
+    bpPrice.textContent = t; tVal.textContent = t;
+    var names = Object.keys(extras);
+    tDesc.textContent = sizeName + (names.length ? ' + ' + names.join(', ') : '');
+  }
+  document.querySelectorAll('.size-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      document.querySelectorAll('.size-card').forEach(function(c){ c.classList.remove('on'); });
+      card.classList.add('on');
+      base = parseInt(card.dataset.price, 10);
+      sizeName = card.dataset.size;
+      photo.src = card.dataset.img;
+      total();
+    });
+  });
+  document.querySelectorAll('.extra').forEach(function(x){
+    x.addEventListener('click', function(){
+      var n = x.dataset.name, p = parseInt(x.dataset.price, 10);
+      if (extras[n]) { delete extras[n]; x.classList.remove('on'); }
+      else { extras[n] = p; x.classList.add('on'); }
+      total();
+    });
+  });
+  document.getElementById('orderBtn').addEventListener('click', function(){
+    this.textContent = '✓ ' + sizeName + ' · €' + tVal.textContent;
+    var b = this; setTimeout(function(){ b.textContent = 'Order your Döner'; }, 2200);
+  });
+  /* guests stepper */
+  var g = 2, gVal = document.getElementById('gVal');
+  document.getElementById('gMinus').addEventListener('click', function(){ g = Math.max(1, g - 1); gVal.textContent = g; });
+  document.getElementById('gPlus').addEventListener('click', function(){ g = Math.min(12, g + 1); gVal.textContent = g; });
+  document.getElementById('placeBtn').addEventListener('click', function(){
+    this.textContent = '✓ Table for ' + g + ' held';
+    var b = this; setTimeout(function(){ b.textContent = 'Reserve the spit'; }, 2200);
+  });
+  total();
+})();
+
+/* ---------- GSAP scenes ---------- */
+if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.hero-title', {y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .15});
+  gsap.from('.hero-foot', {opacity: 0, duration: 1, delay: .6});
+
+  /* SPECS: temperature scrubs with scroll */
+  var tempNum = document.getElementById('tempNum'), tempLine = document.getElementById('tempLine');
+  ScrollTrigger.create({trigger: '#specs', start: 'top 75%', end: 'bottom 55%', scrub: .4,
+    onUpdate: function(self){
+      var v = Math.round(20 + 200 * self.progress);
+      tempNum.textContent = v + '°C';
+      tempLine.style.transform = 'scaleX(' + self.progress + ')';
+    }});
+
+  /* TWO WORLDS: sandwich scales in, scatter blooms */
+  var wtl = gsap.timeline({scrollTrigger: {trigger: '.worlds', start: 'top 80%', end: 'center center', scrub: .5}});
+  wtl.fromTo('#sandwichImg', {scale: .72, y: 30}, {scale: 1, y: 0, ease: 'none'}, 0);
+  wtl.fromTo('#scatterImg', {scale: .6, opacity: 0, rotate: -7}, {scale: 1, opacity: .95, rotate: 0, ease: 'none'}, 0);
+
+  /* ROAST counters + bars */
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end = parseInt(el.dataset.count, 10), obj = {v: 0};
+    gsap.to(obj, {v: end, duration: 1.6, ease: 'power2.out',
+      scrollTrigger: {trigger: el, start: 'top 85%', once: true},
+      onUpdate: function(){ el.textContent = Math.round(obj.v); }});
+  });
+  document.querySelectorAll('[data-bar]').forEach(function(el){
+    gsap.to(el, {width: el.dataset.bar + '%', duration: 1.4, ease: 'power2.out',
+      scrollTrigger: {trigger: el, start: 'top 88%', once: true}});
+  });
+
+  /* reveals */
+  gsap.utils.toArray('.sec-head, .card, .layer-card, .craft-cols > div, .specs-grid > div').forEach(function(el){
+    gsap.fromTo(el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: .85, ease: 'power3.out',
+      scrollTrigger: {trigger: el, start: 'top 88%'}});
+  });
+}
+</script>
+</body>
+</html>
