@@ -42,7 +42,38 @@ header nav a:hover{color:var(--gold)}
 .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
 @media(min-width:901px){.wrap{padding:0 58px}}
 
-/* ---------- HERO ---------- */
+/* ---------- INTRO (pinned canvas scroll-film) ---------- */
+#pbar{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0;z-index:90}
+::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:#0a0d12}::-webkit-scrollbar-thumb{background:#3a3325;border-radius:5px}::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+html{scroll-behavior:smooth}
+.intro{position:relative;height:100svh;min-height:620px;overflow:clip;background:#000}
+.intro canvas{position:absolute;inset:0;width:100%;height:100%}
+.intro .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.intro .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,11,.6),transparent 34%,transparent 75%,rgba(6,8,11,.5)),linear-gradient(0deg,rgba(6,8,11,.88),transparent 34%),linear-gradient(180deg,rgba(6,8,11,.5),transparent 22%)}
+.intro .wrap{position:relative;height:100%;z-index:3}
+.cut-hud{position:absolute;right:22px;bottom:104px;text-align:right;z-index:3}
+.cut-hud .lab{font-size:10px;font-weight:700;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+.cut-hud .pct{font-family:var(--anton);font-size:44px;color:var(--gold);line-height:1.05}
+.cut-hud .line{height:2px;background:rgba(255,255,255,.16);margin-top:8px;width:170px;margin-left:auto}
+.cut-hud .line i{display:block;height:100%;background:var(--gold);transform-origin:right;transform:scaleX(0)}
+@media(max-width:760px){.cut-hud{display:none}}
+/* ---------- ORBIT (worlds) ---------- */
+.orbit-el{position:absolute;width:86px;height:86px;border-radius:50%;object-fit:cover;border:2px solid rgba(217,164,65,.55);box-shadow:0 14px 30px rgba(0,0,0,.6);z-index:1;pointer-events:none;will-change:transform,opacity}
+@media(max-width:760px){.orbit-el{width:56px;height:56px}}
+/* ---------- FISHEYE STRIP ---------- */
+.flux{border-top:1px solid var(--line);padding:96px 0 90px;overflow:clip}
+.flux-lens{clip-path:ellipse(125% 64% at 50% 50%);overflow:clip}
+.flux-track{display:flex;gap:14px;width:max-content;will-change:transform}
+.flux-track img{width:min(430px,72vw);aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+/* ---------- HOVER / PRO TOUCHES ---------- */
+.card,.layer-card{transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s}
+@media(hover:hover){.card:hover,.layer-card:hover{transform:translateY(-7px);border-color:rgba(217,164,65,.55)}}
+.size-card,.extra{transition:border-color .25s,box-shadow .25s,transform .15s}
+.size-card:active,.extra:active{transform:scale(.97)}
+.total-bar button,.place-btn,.order-top{transition:transform .15s,filter .25s}
+.total-bar button:active,.place-btn:active{transform:scale(.96)}
+@media(max-width:560px){.extras-grid{grid-template-columns:1fr 1fr}.craft-big{font-size:15.5vw}}
+@media(max-width:760px){.hero-title{bottom:92px}.sec{padding:80px 0 64px}}
 .hero{position:relative;height:100svh;min-height:620px;overflow:clip}
 .hero-film{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-56%);height:100%;aspect-ratio:9/16;z-index:0}
 .hero-film video{width:100%;height:100%;object-fit:cover}
@@ -51,11 +82,12 @@ header nav a:hover{color:var(--gold)}
 .hero-side.l{left:calc(50% - 348px);top:50%;transform:translateY(-50%) rotate(180deg)}
 .hero-side.r{right:calc(50% - 348px);top:50%;transform:translateY(-50%)}
 @media(max-width:900px){.hero-side{display:none}.hero-film{transform:translateX(-50%)}}
-.hero-title{position:absolute;z-index:3;left:0;bottom:110px}
+.hero-title{position:absolute;z-index:3;left:22px;bottom:110px}
 .hero-title .mono{color:var(--gold);margin-bottom:12px}
 .hero-title h1{font-family:var(--anton);font-size:clamp(64px,10.5vw,148px);line-height:.9;text-transform:uppercase;color:#fff}
 .hero-title h1 i{font-style:normal;color:var(--gold)}
-.hero-foot{position:absolute;z-index:3;left:0;right:0;bottom:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hero-foot{position:absolute;z-index:3;left:22px;right:22px;bottom:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(min-width:901px){.hero-title{left:58px}.hero-foot{left:58px;right:58px}.cut-hud{right:58px}}
 .hero-foot .mono{color:#5d6675}
 
 /* ---------- SECTION SCAFFOLD ---------- */
@@ -190,6 +222,7 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
 </head>
 <body>
 
+<div id="pbar"></div>
 <header>
   <a class="logo" href="#">THE <i>//</i> DÖNER</a>
   <nav>
@@ -203,21 +236,26 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
 </div>
 <div class="ruler" aria-hidden="true"></div>
 
-<!-- 01 · THE SPIT -->
-<section class="hero">
-  <div class="hero-film">
-    <video autoplay muted loop playsinline preload="metadata" poster="img/spit.webp"><source src="films/spit-film-p.mp4" type="video/mp4"></video>
-  </div>
+<!-- 01 · THE CUT — pinned scroll-film intro -->
+<section class="intro" id="intro">
+  <img class="poster" src="img/slicing.webp" alt="Slicing the döner spit">
+  <canvas id="introCanvas"></canvas>
+  <div class="shade"></div>
   <div class="hero-side l">Slow-roasted // No.01</div>
   <div class="hero-side r">Spit · Sliced · Stacked</div>
-  <div class="wrap" style="position:relative;height:100%">
+  <div class="wrap">
     <div class="hero-title">
       <div class="mono">Est. Berlin — The original stack</div>
       <h1>The<br><i>//</i> Döner</h1>
     </div>
+    <div class="cut-hud">
+      <div class="lab">The cut · scroll</div>
+      <div class="pct"><span id="cutPct">000</span>%</div>
+      <div class="line"><i id="cutLine"></i></div>
+    </div>
     <div class="hero-foot">
       <span class="mono">200–220°C · Radiant heat</span>
-      <span class="mono">Scroll to descend ↓</span>
+      <span class="mono">Scroll — the knife descends ↓</span>
       <span class="mono">60 cm · Seven spices</span>
     </div>
   </div>
@@ -267,8 +305,14 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
   <div class="wrap">
     <h2>Born from<br><i>two</i> worlds</h2>
     <div class="flags"><span class="flag tr">Türkiye</span><span class="flag de">Deutschland</span></div>
-    <div class="worlds-stage">
+    <div class="worlds-stage" id="worldsStage">
       <img class="scatter" id="scatterImg" src="img/scatter-a.webp" alt="">
+      <img class="orbit-el" data-orbit src="img/layer-bread.webp" alt="">
+      <img class="orbit-el" data-orbit src="img/layer-veal.webp" alt="">
+      <img class="orbit-el" data-orbit src="img/layer-yogurt.webp" alt="">
+      <img class="orbit-el" data-orbit src="img/layer-onions.webp" alt="">
+      <img class="orbit-el" data-orbit src="img/layer-herbs.webp" alt="">
+      <img class="orbit-el" data-orbit src="img/layer-tomato.webp" alt="">
       <img class="sandwich" id="sandwichImg" src="img/sandwich-a.webp" alt="The Döner sandwich">
     </div>
   </div>
@@ -303,6 +347,18 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
           <span class="tag">Signature</span>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- REEL FLUX — fisheye strip -->
+<section class="flux">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">// —</span><h2>From the spit</h2><span class="mono">Reel flux · Keep scrolling</span></div>
+  </div>
+  <div class="flux-lens">
+    <div class="flux-track" id="fluxTrack">
+      <img src="img/spit.webp" alt=""><img src="img/wrap-classic.webp" alt=""><img src="img/burst-macro.webp" alt=""><img src="img/wrap-gold.webp" alt=""><img src="img/kitchen.webp" alt=""><img src="img/wrap-spicy.webp" alt="">
     </div>
   </div>
 </section>
@@ -458,12 +514,80 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
   total();
 })();
 
+/* ---------- SCROLL PROGRESS HAIRLINE ---------- */
+window.addEventListener('scroll', function(){
+  var h = document.documentElement;
+  var p = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  document.getElementById('pbar').style.width = (p * 100) + '%';
+}, {passive: true});
+
 /* ---------- GSAP scenes ---------- */
 if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   gsap.registerPlugin(ScrollTrigger);
 
   gsap.from('.hero-title', {y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', delay: .15});
   gsap.from('.hero-foot', {opacity: 0, duration: 1, delay: .6});
+
+  /* INTRO: pinned canvas scroll-film — the knife shot plays with scroll */
+  (function(){
+    var N = 48, frames = [], loaded = 0, cur = -1;
+    var canvas = document.getElementById('introCanvas'), ctx = canvas.getContext('2d');
+    var pct = document.getElementById('cutPct'), line = document.getElementById('cutLine');
+    function size(){ var d = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = canvas.clientWidth * d; canvas.height = canvas.clientHeight * d; cur = -1; }
+    function draw(i){
+      var img = frames[i]; if (!img || !img.complete || !img.naturalWidth) return;
+      var cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+      var w = img.naturalWidth * s, h = img.naturalHeight * s;
+      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+    }
+    for (var i = 0; i < N; i++){ (function(k){ var im = new Image();
+      im.onload = function(){ loaded++; if (k === 0) draw(0); };
+      im.src = 'frames/intro-' + String(k + 1).padStart(3, '0') + '.webp'; frames[k] = im; })(i); }
+    size(); window.addEventListener('resize', size);
+    ScrollTrigger.create({trigger: '#intro', start: 'top top', end: '+=1700', pin: true, scrub: .35,
+      onUpdate: function(self){
+        var idx = Math.min(N - 1, Math.floor(self.progress * N));
+        if (idx !== cur){ cur = idx; draw(idx); }
+        if (pct) pct.textContent = String(Math.round(self.progress * 100)).padStart(3, '0');
+        if (line) line.style.transform = 'scaleX(' + self.progress + ')';
+      }});
+  })();
+
+  /* ORBIT: ingredients circle the sandwich (Motion Pack) */
+  (function(){
+    var stage = document.getElementById('worldsStage'); if (!stage) return;
+    var els = stage.querySelectorAll('[data-orbit]'), run = false, ang = 0, last = 0;
+    function tick(t){
+      if (!run) return;
+      var dt = Math.min(50, t - last); last = t; ang += dt * 0.00022;
+      var W = stage.clientWidth, H = stage.clientHeight, rx = W * 0.37, ry = H * 0.36;
+      els.forEach(function(el, i){
+        var a = ang + i * (Math.PI * 2 / els.length), d = Math.sin(a);
+        var x = Math.cos(a) * rx, y = d * ry, s = .55 + .5 * (d * .5 + .5);
+        el.style.transform = 'translate(-50%,-50%) translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
+        el.style.left = '50%'; el.style.top = '50%';
+        el.style.opacity = (.3 + .7 * (d * .5 + .5)).toFixed(2);
+        el.style.zIndex = d > 0.25 ? 3 : 1;
+      });
+      requestAnimationFrame(tick);
+    }
+    new IntersectionObserver(function(en){ en.forEach(function(e){
+      if (e.isIntersecting && !run){ run = true; last = performance.now(); requestAnimationFrame(tick); }
+      else if (!e.isIntersecting) run = false;
+    }); }, {threshold: .05}).observe(stage);
+  })();
+
+  /* CASCADE: line-up cards settle along the diagonal (Motion Pack) */
+  gsap.utils.toArray('#lineup .card').forEach(function(card, i){
+    gsap.fromTo(card, {x: (i - 1) * 54, y: 64 + i * 30, opacity: .15},
+      {x: 0, y: 0, opacity: 1, ease: 'none',
+       scrollTrigger: {trigger: '#lineup', start: 'top 88%', end: 'top 30%', scrub: .5}});
+  });
+
+  /* REEL FLUX: fisheye strip slides with scroll (Motion Pack) */
+  gsap.fromTo('#fluxTrack', {xPercent: -2}, {xPercent: -26, ease: 'none',
+    scrollTrigger: {trigger: '.flux', start: 'top bottom', end: 'bottom top', scrub: .5}});
 
   /* SPECS: temperature scrubs with scroll */
   var tempNum = document.getElementById('tempNum'), tempLine = document.getElementById('tempLine');
@@ -492,7 +616,7 @@ if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matche
   });
 
   /* reveals */
-  gsap.utils.toArray('.sec-head, .card, .layer-card, .craft-cols > div, .specs-grid > div').forEach(function(el){
+  gsap.utils.toArray('.sec-head, .layer-card, .craft-cols > div, .specs-grid > div').forEach(function(el){
     gsap.fromTo(el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: .85, ease: 'power3.out',
       scrollTrigger: {trigger: el, start: 'top 88%'}});
   });
