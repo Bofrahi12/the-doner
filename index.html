@@ -238,7 +238,7 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
 
 <!-- 01 · THE CUT — pinned scroll-film intro -->
 <section class="intro" id="intro">
-  <img class="poster" src="img/slicing.webp" alt="Slicing the döner spit">
+  <img class="poster" src="frames/intro-001.webp" alt="Slicing the döner spit — real footage">
   <canvas id="introCanvas"></canvas>
   <div class="shade"></div>
   <div class="hero-side l">Slow-roasted // No.01</div>
@@ -458,7 +458,7 @@ footer p{font-size:11px;letter-spacing:.1em;color:#5d6675}
       <button class="place-btn" id="placeBtn">Reserve the spit</button>
     </div>
     <footer>
-      <p>THE // DÖNER — a scroll-experience concept demo. Food photography is AI-generated for this demo. Built by VERTEX WEB.</p>
+      <p>THE // DÖNER — a scroll-experience concept demo. Built by VERTEX WEB. Most food photography is AI-generated for this demo; the intro slicing footage is real (Pexels, free license).</p>
       <p>SPIT · SLICED · STACKED</p>
     </footer>
   </div>
@@ -530,7 +530,7 @@ if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matche
 
   /* INTRO: pinned canvas scroll-film — the knife shot plays with scroll */
   (function(){
-    var N = 48, frames = [], loaded = 0, cur = -1;
+    var N = 57, frames = [], loaded = 0, cur = -1;
     var canvas = document.getElementById('introCanvas'), ctx = canvas.getContext('2d');
     var pct = document.getElementById('cutPct'), line = document.getElementById('cutLine');
     function size(){ var d = Math.min(window.devicePixelRatio || 1, 1.5);
